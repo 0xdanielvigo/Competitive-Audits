@@ -1,0 +1,15 @@
+[profile.default]
+src = "contracts"
+out = "artifacts"
+libs = ["node_modules", "lib"]
+remappings = [
+    "@layerzerolabs/=node_modules/@layerzerolabs/",
+    "@openzeppelin/=node_modules/@openzeppelin/",
+    "ds-test/=node_modules/@layerzerolabs/toolbox-foundry/lib/ds-test/",
+    "forge-std/=node_modules/@layerzerolabs/toolbox-foundry/lib/forge-std/",
+    "hardhat-deploy/=node_modules/hardhat-deploy/",
+    "hardhat/=node_modules/hardhat/",
+    "solidity-bytes-utils/=node_modules/solidity-bytes-utils/",
+]
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

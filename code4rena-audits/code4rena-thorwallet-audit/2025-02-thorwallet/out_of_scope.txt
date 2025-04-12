@@ -1,0 +1,4 @@
+./contracts/mocks/Tgt.sol
+./test/mocks/ERC20Mock.sol
+./test/mocks/OFTComposerMock.sol
+./test/mocks/OFTMock.sol

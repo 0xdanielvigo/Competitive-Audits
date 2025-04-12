@@ -1,0 +1,821 @@
+{
+  "address": "0x22EAafe4004225c670C8A8007887DC0a9433bd86",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_tgt",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_titn",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "initialOwner",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidAmountReceived",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidTokenReceived",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "MergeEnded",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "MergeLocked",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableInvalidOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableUnauthorizedAccount",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ReentrancyGuardReentrantCall",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        }
+      ],
+      "name": "SafeERC20FailedOperation",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TooEarlyToClaimRemainingTitn",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ZeroAmount",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "ClaimTitn",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "titnOut",
+          "type": "uint256"
+        }
+      ],
+      "name": "ClaimableTitnUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Deposit",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "LaunchTimeSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "enum IMerge.LockedStatus",
+          "name": "newStatus",
+          "type": "uint8"
+        }
+      ],
+      "name": "LockedStatusUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        }
+      ],
+      "name": "Withdraw",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "WithdrawRemainingTitn",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "TGT_TO_EXCHANGE",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "TITN_ARB",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "claimTitn",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "claimableTitnPerUser",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "claimedTitnPerUser",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "deposit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "getClaimableTitnPerUser",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "gettotalClaimedTitnPerUser",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "initialTotalClaimable",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "launchTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "lockedStatus",
+      "outputs": [
+        {
+          "internalType": "enum IMerge.LockedStatus",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "extraData",
+          "type": "bytes"
+        }
+      ],
+      "name": "onTokenTransfer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tgtAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "quoteTitn",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "titnAmount",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "remainingTitnAfter1Year",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "setLaunchTime",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum IMerge.LockedStatus",
+          "name": "newStatus",
+          "type": "uint8"
+        }
+      ],
+      "name": "setLockedStatus",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "tgt",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "tgtBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "titn",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "titnBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalTitnClaimable",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalTitnClaimed",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "withdrawRemainingTitn",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x39dc9688720ccd10fbacd6cb2702d2cb2b7d3901868f946740e0144d9aaf9bd1",
+  "receipt": {
+    "to": null,
+    "from": "0x5166ef11e5dF6D4Ca213778fFf4756937e469663",
+    "contractAddress": "0x22EAafe4004225c670C8A8007887DC0a9433bd86",
+    "transactionIndex": 1,
+    "gasUsed": "1764991",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000002000000000001000000000000000000000000100000000000020000000000000000000800000000000000000000000000000000400000000000000000000000000002000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xae28dbdb4eaee562d8df940d984395a3d295654869bedc5ecb7b905e4b0dce36",
+    "transactionHash": "0x39dc9688720ccd10fbacd6cb2702d2cb2b7d3901868f946740e0144d9aaf9bd1",
+    "logs": [
+      {
+        "transactionIndex": 1,
+        "blockNumber": 298389708,
+        "transactionHash": "0x39dc9688720ccd10fbacd6cb2702d2cb2b7d3901868f946740e0144d9aaf9bd1",
+        "address": "0x22EAafe4004225c670C8A8007887DC0a9433bd86",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000005166ef11e5df6d4ca213778fff4756937e469663"
+        ],
+        "data": "0x",
+        "logIndex": 0,
+        "blockHash": "0xae28dbdb4eaee562d8df940d984395a3d295654869bedc5ecb7b905e4b0dce36"
+      }
+    ],
+    "blockNumber": 298389708,
+    "cumulativeGasUsed": "1764991",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x429fed88f10285e61b12bdf00848315fbdfcc341",
+    "0x2923b8ea6530FB0c9516f50Cd334e18d122ADAd3",
+    "0x5166ef11e5dF6D4Ca213778fFf4756937e469663"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "fdfc2e75a3091f15f48a45fa2f3c772b",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.22+commit.4fc1097e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_tgt\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_titn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"initialOwner\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"InvalidAmountReceived\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidTokenReceived\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MergeEnded\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MergeLocked\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OwnableInvalidOwner\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"OwnableUnauthorizedAccount\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ReentrancyGuardReentrantCall\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"SafeERC20FailedOperation\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"TooEarlyToClaimRemainingTitn\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ZeroAmount\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"ClaimTitn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"titnOut\",\"type\":\"uint256\"}],\"name\":\"ClaimableTitnUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"LaunchTimeSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"enum IMerge.LockedStatus\",\"name\":\"newStatus\",\"type\":\"uint8\"}],\"name\":\"LockedStatusUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"Withdraw\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"WithdrawRemainingTitn\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"TGT_TO_EXCHANGE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"TITN_ARB\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"claimTitn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"claimableTitnPerUser\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"claimedTitnPerUser\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"deposit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"getClaimableTitnPerUser\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"gettotalClaimedTitnPerUser\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"initialTotalClaimable\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"launchTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lockedStatus\",\"outputs\":[{\"internalType\":\"enum IMerge.LockedStatus\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"extraData\",\"type\":\"bytes\"}],\"name\":\"onTokenTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tgtAmount\",\"type\":\"uint256\"}],\"name\":\"quoteTitn\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"titnAmount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"remainingTitnAfter1Year\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"setLaunchTime\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum IMerge.LockedStatus\",\"name\":\"newStatus\",\"type\":\"uint8\"}],\"name\":\"setLockedStatus\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"tgt\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"tgtBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"titn\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"titnBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalTitnClaimable\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalTitnClaimed\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawRemainingTitn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"errors\":{\"OwnableInvalidOwner(address)\":[{\"details\":\"The owner is not a valid owner account. (eg. `address(0)`)\"}],\"OwnableUnauthorizedAccount(address)\":[{\"details\":\"The caller account is not authorized to perform an operation.\"}],\"ReentrancyGuardReentrantCall()\":[{\"details\":\"Unauthorized reentrant call.\"}],\"SafeERC20FailedOperation(address)\":[{\"details\":\"An operation with an ERC-20 token failed.\"}]},\"kind\":\"dev\",\"methods\":{\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"onTokenTransfer(address,uint256,bytes)\":{\"notice\":\"tgt token transferAndCall ERC677-like\"},\"withdraw(address,uint256)\":{\"notice\":\"Withdraw any locked contracts in Merge contract\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/MergeTgt.sol\":\"MergeTgt\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.0) (access/Ownable.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {Context} from \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * The initial owner is set to the address provided by the deployer. This can\\n * later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    /**\\n     * @dev The caller account is not authorized to perform an operation.\\n     */\\n    error OwnableUnauthorizedAccount(address account);\\n\\n    /**\\n     * @dev The owner is not a valid owner account. (eg. `address(0)`)\\n     */\\n    error OwnableInvalidOwner(address owner);\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the address provided by the deployer as the initial owner.\\n     */\\n    constructor(address initialOwner) {\\n        if (initialOwner == address(0)) {\\n            revert OwnableInvalidOwner(address(0));\\n        }\\n        _transferOwnership(initialOwner);\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        _checkOwner();\\n        _;\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if the sender is not the owner.\\n     */\\n    function _checkOwner() internal view virtual {\\n        if (owner() != _msgSender()) {\\n            revert OwnableUnauthorizedAccount(_msgSender());\\n        }\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby disabling any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _transferOwnership(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        if (newOwner == address(0)) {\\n            revert OwnableInvalidOwner(address(0));\\n        }\\n        _transferOwnership(newOwner);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Internal function without access restriction.\\n     */\\n    function _transferOwnership(address newOwner) internal virtual {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb\",\"license\":\"MIT\"},\"@openzeppelin/contracts/interfaces/IERC1363.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.1.0) (interfaces/IERC1363.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {IERC20} from \\\"./IERC20.sol\\\";\\nimport {IERC165} from \\\"./IERC165.sol\\\";\\n\\n/**\\n * @title IERC1363\\n * @dev Interface of the ERC-1363 standard as defined in the https://eips.ethereum.org/EIPS/eip-1363[ERC-1363].\\n *\\n * Defines an extension interface for ERC-20 tokens that supports executing code on a recipient contract\\n * after `transfer` or `transferFrom`, or code on a spender contract after `approve`, in a single transaction.\\n */\\ninterface IERC1363 is IERC20, IERC165 {\\n    /*\\n     * Note: the ERC-165 identifier for this interface is 0xb0202a11.\\n     * 0xb0202a11 ===\\n     *   bytes4(keccak256('transferAndCall(address,uint256)')) ^\\n     *   bytes4(keccak256('transferAndCall(address,uint256,bytes)')) ^\\n     *   bytes4(keccak256('transferFromAndCall(address,address,uint256)')) ^\\n     *   bytes4(keccak256('transferFromAndCall(address,address,uint256,bytes)')) ^\\n     *   bytes4(keccak256('approveAndCall(address,uint256)')) ^\\n     *   bytes4(keccak256('approveAndCall(address,uint256,bytes)'))\\n     */\\n\\n    /**\\n     * @dev Moves a `value` amount of tokens from the caller's account to `to`\\n     * and then calls {IERC1363Receiver-onTransferReceived} on `to`.\\n     * @param to The address which you want to transfer to.\\n     * @param value The amount of tokens to be transferred.\\n     * @return A boolean value indicating whether the operation succeeded unless throwing.\\n     */\\n    function transferAndCall(address to, uint256 value) external returns (bool);\\n\\n    /**\\n     * @dev Moves a `value` amount of tokens from the caller's account to `to`\\n     * and then calls {IERC1363Receiver-onTransferReceived} on `to`.\\n     * @param to The address which you want to transfer to.\\n     * @param value The amount of tokens to be transferred.\\n     * @param data Additional data with no specified format, sent in call to `to`.\\n     * @return A boolean value indicating whether the operation succeeded unless throwing.\\n     */\\n    function transferAndCall(address to, uint256 value, bytes calldata data) external returns (bool);\\n\\n    /**\\n     * @dev Moves a `value` amount of tokens from `from` to `to` using the allowance mechanism\\n     * and then calls {IERC1363Receiver-onTransferReceived} on `to`.\\n     * @param from The address which you want to send tokens from.\\n     * @param to The address which you want to transfer to.\\n     * @param value The amount of tokens to be transferred.\\n     * @return A boolean value indicating whether the operation succeeded unless throwing.\\n     */\\n    function transferFromAndCall(address from, address to, uint256 value) external returns (bool);\\n\\n    /**\\n     * @dev Moves a `value` amount of tokens from `from` to `to` using the allowance mechanism\\n     * and then calls {IERC1363Receiver-onTransferReceived} on `to`.\\n     * @param from The address which you want to send tokens from.\\n     * @param to The address which you want to transfer to.\\n     * @param value The amount of tokens to be transferred.\\n     * @param data Additional data with no specified format, sent in call to `to`.\\n     * @return A boolean value indicating whether the operation succeeded unless throwing.\\n     */\\n    function transferFromAndCall(address from, address to, uint256 value, bytes calldata data) external returns (bool);\\n\\n    /**\\n     * @dev Sets a `value` amount of tokens as the allowance of `spender` over the\\n     * caller's tokens and then calls {IERC1363Spender-onApprovalReceived} on `spender`.\\n     * @param spender The address which will spend the funds.\\n     * @param value The amount of tokens to be spent.\\n     * @return A boolean value indicating whether the operation succeeded unless throwing.\\n     */\\n    function approveAndCall(address spender, uint256 value) external returns (bool);\\n\\n    /**\\n     * @dev Sets a `value` amount of tokens as the allowance of `spender` over the\\n     * caller's tokens and then calls {IERC1363Spender-onApprovalReceived} on `spender`.\\n     * @param spender The address which will spend the funds.\\n     * @param value The amount of tokens to be spent.\\n     * @param data Additional data with no specified format, sent in call to `spender`.\\n     * @return A boolean value indicating whether the operation succeeded unless throwing.\\n     */\\n    function approveAndCall(address spender, uint256 value, bytes calldata data) external returns (bool);\\n}\\n\",\"keccak256\":\"0x9b6b3e7803bc5f2f8cd7ad57db8ac1def61a9930a5a3107df4882e028a9605d7\",\"license\":\"MIT\"},\"@openzeppelin/contracts/interfaces/IERC165.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.0) (interfaces/IERC165.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {IERC165} from \\\"../utils/introspection/IERC165.sol\\\";\\n\",\"keccak256\":\"0xde7e9fd9aee8d4f40772f96bb3b58836cbc6dfc0227014a061947f8821ea9724\",\"license\":\"MIT\"},\"@openzeppelin/contracts/interfaces/IERC20.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.0) (interfaces/IERC20.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {IERC20} from \\\"../token/ERC20/IERC20.sol\\\";\\n\",\"keccak256\":\"0xce41876e78d1badc0512229b4d14e4daf83bc1003d7f83978d18e0e56f965b9c\",\"license\":\"MIT\"},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.1.0) (token/ERC20/IERC20.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Interface of the ERC-20 standard as defined in the ERC.\\n */\\ninterface IERC20 {\\n    /**\\n     * @dev Emitted when `value` tokens are moved from one account (`from`) to\\n     * another (`to`).\\n     *\\n     * Note that `value` may be zero.\\n     */\\n    event Transfer(address indexed from, address indexed to, uint256 value);\\n\\n    /**\\n     * @dev Emitted when the allowance of a `spender` for an `owner` is set by\\n     * a call to {approve}. `value` is the new allowance.\\n     */\\n    event Approval(address indexed owner, address indexed spender, uint256 value);\\n\\n    /**\\n     * @dev Returns the value of tokens in existence.\\n     */\\n    function totalSupply() external view returns (uint256);\\n\\n    /**\\n     * @dev Returns the value of tokens owned by `account`.\\n     */\\n    function balanceOf(address account) external view returns (uint256);\\n\\n    /**\\n     * @dev Moves a `value` amount of tokens from the caller's account to `to`.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * Emits a {Transfer} event.\\n     */\\n    function transfer(address to, uint256 value) external returns (bool);\\n\\n    /**\\n     * @dev Returns the remaining number of tokens that `spender` will be\\n     * allowed to spend on behalf of `owner` through {transferFrom}. This is\\n     * zero by default.\\n     *\\n     * This value changes when {approve} or {transferFrom} are called.\\n     */\\n    function allowance(address owner, address spender) external view returns (uint256);\\n\\n    /**\\n     * @dev Sets a `value` amount of tokens as the allowance of `spender` over the\\n     * caller's tokens.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * IMPORTANT: Beware that changing an allowance with this method brings the risk\\n     * that someone may use both the old and the new allowance by unfortunate\\n     * transaction ordering. One possible solution to mitigate this race\\n     * condition is to first reduce the spender's allowance to 0 and set the\\n     * desired value afterwards:\\n     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729\\n     *\\n     * Emits an {Approval} event.\\n     */\\n    function approve(address spender, uint256 value) external returns (bool);\\n\\n    /**\\n     * @dev Moves a `value` amount of tokens from `from` to `to` using the\\n     * allowance mechanism. `value` is then deducted from the caller's\\n     * allowance.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * Emits a {Transfer} event.\\n     */\\n    function transferFrom(address from, address to, uint256 value) external returns (bool);\\n}\\n\",\"keccak256\":\"0xe06a3f08a987af6ad2e1c1e774405d4fe08f1694b67517438b467cecf0da0ef7\",\"license\":\"MIT\"},\"@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.2.0) (token/ERC20/utils/SafeERC20.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {IERC20} from \\\"../IERC20.sol\\\";\\nimport {IERC1363} from \\\"../../../interfaces/IERC1363.sol\\\";\\n\\n/**\\n * @title SafeERC20\\n * @dev Wrappers around ERC-20 operations that throw on failure (when the token\\n * contract returns false). Tokens that return no value (and instead revert or\\n * throw on failure) are also supported, non-reverting calls are assumed to be\\n * successful.\\n * To use this library you can add a `using SafeERC20 for IERC20;` statement to your contract,\\n * which allows you to call the safe operations as `token.safeTransfer(...)`, etc.\\n */\\nlibrary SafeERC20 {\\n    /**\\n     * @dev An operation with an ERC-20 token failed.\\n     */\\n    error SafeERC20FailedOperation(address token);\\n\\n    /**\\n     * @dev Indicates a failed `decreaseAllowance` request.\\n     */\\n    error SafeERC20FailedDecreaseAllowance(address spender, uint256 currentAllowance, uint256 requestedDecrease);\\n\\n    /**\\n     * @dev Transfer `value` amount of `token` from the calling contract to `to`. If `token` returns no value,\\n     * non-reverting calls are assumed to be successful.\\n     */\\n    function safeTransfer(IERC20 token, address to, uint256 value) internal {\\n        _callOptionalReturn(token, abi.encodeCall(token.transfer, (to, value)));\\n    }\\n\\n    /**\\n     * @dev Transfer `value` amount of `token` from `from` to `to`, spending the approval given by `from` to the\\n     * calling contract. If `token` returns no value, non-reverting calls are assumed to be successful.\\n     */\\n    function safeTransferFrom(IERC20 token, address from, address to, uint256 value) internal {\\n        _callOptionalReturn(token, abi.encodeCall(token.transferFrom, (from, to, value)));\\n    }\\n\\n    /**\\n     * @dev Increase the calling contract's allowance toward `spender` by `value`. If `token` returns no value,\\n     * non-reverting calls are assumed to be successful.\\n     *\\n     * IMPORTANT: If the token implements ERC-7674 (ERC-20 with temporary allowance), and if the \\\"client\\\"\\n     * smart contract uses ERC-7674 to set temporary allowances, then the \\\"client\\\" smart contract should avoid using\\n     * this function. Performing a {safeIncreaseAllowance} or {safeDecreaseAllowance} operation on a token contract\\n     * that has a non-zero temporary allowance (for that particular owner-spender) will result in unexpected behavior.\\n     */\\n    function safeIncreaseAllowance(IERC20 token, address spender, uint256 value) internal {\\n        uint256 oldAllowance = token.allowance(address(this), spender);\\n        forceApprove(token, spender, oldAllowance + value);\\n    }\\n\\n    /**\\n     * @dev Decrease the calling contract's allowance toward `spender` by `requestedDecrease`. If `token` returns no\\n     * value, non-reverting calls are assumed to be successful.\\n     *\\n     * IMPORTANT: If the token implements ERC-7674 (ERC-20 with temporary allowance), and if the \\\"client\\\"\\n     * smart contract uses ERC-7674 to set temporary allowances, then the \\\"client\\\" smart contract should avoid using\\n     * this function. Performing a {safeIncreaseAllowance} or {safeDecreaseAllowance} operation on a token contract\\n     * that has a non-zero temporary allowance (for that particular owner-spender) will result in unexpected behavior.\\n     */\\n    function safeDecreaseAllowance(IERC20 token, address spender, uint256 requestedDecrease) internal {\\n        unchecked {\\n            uint256 currentAllowance = token.allowance(address(this), spender);\\n            if (currentAllowance < requestedDecrease) {\\n                revert SafeERC20FailedDecreaseAllowance(spender, currentAllowance, requestedDecrease);\\n            }\\n            forceApprove(token, spender, currentAllowance - requestedDecrease);\\n        }\\n    }\\n\\n    /**\\n     * @dev Set the calling contract's allowance toward `spender` to `value`. If `token` returns no value,\\n     * non-reverting calls are assumed to be successful. Meant to be used with tokens that require the approval\\n     * to be set to zero before setting it to a non-zero value, such as USDT.\\n     *\\n     * NOTE: If the token implements ERC-7674, this function will not modify any temporary allowance. This function\\n     * only sets the \\\"standard\\\" allowance. Any temporary allowance will remain active, in addition to the value being\\n     * set here.\\n     */\\n    function forceApprove(IERC20 token, address spender, uint256 value) internal {\\n        bytes memory approvalCall = abi.encodeCall(token.approve, (spender, value));\\n\\n        if (!_callOptionalReturnBool(token, approvalCall)) {\\n            _callOptionalReturn(token, abi.encodeCall(token.approve, (spender, 0)));\\n            _callOptionalReturn(token, approvalCall);\\n        }\\n    }\\n\\n    /**\\n     * @dev Performs an {ERC1363} transferAndCall, with a fallback to the simple {ERC20} transfer if the target has no\\n     * code. This can be used to implement an {ERC721}-like safe transfer that rely on {ERC1363} checks when\\n     * targeting contracts.\\n     *\\n     * Reverts if the returned value is other than `true`.\\n     */\\n    function transferAndCallRelaxed(IERC1363 token, address to, uint256 value, bytes memory data) internal {\\n        if (to.code.length == 0) {\\n            safeTransfer(token, to, value);\\n        } else if (!token.transferAndCall(to, value, data)) {\\n            revert SafeERC20FailedOperation(address(token));\\n        }\\n    }\\n\\n    /**\\n     * @dev Performs an {ERC1363} transferFromAndCall, with a fallback to the simple {ERC20} transferFrom if the target\\n     * has no code. This can be used to implement an {ERC721}-like safe transfer that rely on {ERC1363} checks when\\n     * targeting contracts.\\n     *\\n     * Reverts if the returned value is other than `true`.\\n     */\\n    function transferFromAndCallRelaxed(\\n        IERC1363 token,\\n        address from,\\n        address to,\\n        uint256 value,\\n        bytes memory data\\n    ) internal {\\n        if (to.code.length == 0) {\\n            safeTransferFrom(token, from, to, value);\\n        } else if (!token.transferFromAndCall(from, to, value, data)) {\\n            revert SafeERC20FailedOperation(address(token));\\n        }\\n    }\\n\\n    /**\\n     * @dev Performs an {ERC1363} approveAndCall, with a fallback to the simple {ERC20} approve if the target has no\\n     * code. This can be used to implement an {ERC721}-like safe transfer that rely on {ERC1363} checks when\\n     * targeting contracts.\\n     *\\n     * NOTE: When the recipient address (`to`) has no code (i.e. is an EOA), this function behaves as {forceApprove}.\\n     * Opposedly, when the recipient address (`to`) has code, this function only attempts to call {ERC1363-approveAndCall}\\n     * once without retrying, and relies on the returned value to be true.\\n     *\\n     * Reverts if the returned value is other than `true`.\\n     */\\n    function approveAndCallRelaxed(IERC1363 token, address to, uint256 value, bytes memory data) internal {\\n        if (to.code.length == 0) {\\n            forceApprove(token, to, value);\\n        } else if (!token.approveAndCall(to, value, data)) {\\n            revert SafeERC20FailedOperation(address(token));\\n        }\\n    }\\n\\n    /**\\n     * @dev Imitates a Solidity high-level call (i.e. a regular function call to a contract), relaxing the requirement\\n     * on the return value: the return value is optional (but if data is returned, it must not be false).\\n     * @param token The token targeted by the call.\\n     * @param data The call data (encoded using abi.encode or one of its variants).\\n     *\\n     * This is a variant of {_callOptionalReturnBool} that reverts if call fails to meet the requirements.\\n     */\\n    function _callOptionalReturn(IERC20 token, bytes memory data) private {\\n        uint256 returnSize;\\n        uint256 returnValue;\\n        assembly (\\\"memory-safe\\\") {\\n            let success := call(gas(), token, 0, add(data, 0x20), mload(data), 0, 0x20)\\n            // bubble errors\\n            if iszero(success) {\\n                let ptr := mload(0x40)\\n                returndatacopy(ptr, 0, returndatasize())\\n                revert(ptr, returndatasize())\\n            }\\n            returnSize := returndatasize()\\n            returnValue := mload(0)\\n        }\\n\\n        if (returnSize == 0 ? address(token).code.length == 0 : returnValue != 1) {\\n            revert SafeERC20FailedOperation(address(token));\\n        }\\n    }\\n\\n    /**\\n     * @dev Imitates a Solidity high-level call (i.e. a regular function call to a contract), relaxing the requirement\\n     * on the return value: the return value is optional (but if data is returned, it must not be false).\\n     * @param token The token targeted by the call.\\n     * @param data The call data (encoded using abi.encode or one of its variants).\\n     *\\n     * This is a variant of {_callOptionalReturn} that silently catches all reverts and returns a bool instead.\\n     */\\n    function _callOptionalReturnBool(IERC20 token, bytes memory data) private returns (bool) {\\n        bool success;\\n        uint256 returnSize;\\n        uint256 returnValue;\\n        assembly (\\\"memory-safe\\\") {\\n            success := call(gas(), token, 0, add(data, 0x20), mload(data), 0, 0x20)\\n            returnSize := returndatasize()\\n            returnValue := mload(0)\\n        }\\n        return success && (returnSize == 0 ? address(token).code.length > 0 : returnValue == 1);\\n    }\\n}\\n\",\"keccak256\":\"0x4ea01544758fd2c7045961904686bfe232d2220a04ecaa2d6b08dac17827febf\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.1) (utils/Context.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n\\n    function _contextSuffixLength() internal view virtual returns (uint256) {\\n        return 0;\\n    }\\n}\\n\",\"keccak256\":\"0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/ReentrancyGuard.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.1.0) (utils/ReentrancyGuard.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Contract module that helps prevent reentrant calls to a function.\\n *\\n * Inheriting from `ReentrancyGuard` will make the {nonReentrant} modifier\\n * available, which can be applied to functions to make sure there are no nested\\n * (reentrant) calls to them.\\n *\\n * Note that because there is a single `nonReentrant` guard, functions marked as\\n * `nonReentrant` may not call one another. This can be worked around by making\\n * those functions `private`, and then adding `external` `nonReentrant` entry\\n * points to them.\\n *\\n * TIP: If EIP-1153 (transient storage) is available on the chain you're deploying at,\\n * consider using {ReentrancyGuardTransient} instead.\\n *\\n * TIP: If you would like to learn more about reentrancy and alternative ways\\n * to protect against it, check out our blog post\\n * https://blog.openzeppelin.com/reentrancy-after-istanbul/[Reentrancy After Istanbul].\\n */\\nabstract contract ReentrancyGuard {\\n    // Booleans are more expensive than uint256 or any type that takes up a full\\n    // word because each write operation emits an extra SLOAD to first read the\\n    // slot's contents, replace the bits taken up by the boolean, and then write\\n    // back. This is the compiler's defense against contract upgrades and\\n    // pointer aliasing, and it cannot be disabled.\\n\\n    // The values being non-zero value makes deployment a bit more expensive,\\n    // but in exchange the refund on every call to nonReentrant will be lower in\\n    // amount. Since refunds are capped to a percentage of the total\\n    // transaction's gas, it is best to keep them low in cases like this one, to\\n    // increase the likelihood of the full refund coming into effect.\\n    uint256 private constant NOT_ENTERED = 1;\\n    uint256 private constant ENTERED = 2;\\n\\n    uint256 private _status;\\n\\n    /**\\n     * @dev Unauthorized reentrant call.\\n     */\\n    error ReentrancyGuardReentrantCall();\\n\\n    constructor() {\\n        _status = NOT_ENTERED;\\n    }\\n\\n    /**\\n     * @dev Prevents a contract from calling itself, directly or indirectly.\\n     * Calling a `nonReentrant` function from another `nonReentrant`\\n     * function is not supported. It is possible to prevent this from happening\\n     * by making the `nonReentrant` function external, and making it call a\\n     * `private` function that does the actual work.\\n     */\\n    modifier nonReentrant() {\\n        _nonReentrantBefore();\\n        _;\\n        _nonReentrantAfter();\\n    }\\n\\n    function _nonReentrantBefore() private {\\n        // On the first call to nonReentrant, _status will be NOT_ENTERED\\n        if (_status == ENTERED) {\\n            revert ReentrancyGuardReentrantCall();\\n        }\\n\\n        // Any calls to nonReentrant after this point will fail\\n        _status = ENTERED;\\n    }\\n\\n    function _nonReentrantAfter() private {\\n        // By storing the original value once again, a refund is triggered (see\\n        // https://eips.ethereum.org/EIPS/eip-2200)\\n        _status = NOT_ENTERED;\\n    }\\n\\n    /**\\n     * @dev Returns true if the reentrancy guard is currently set to \\\"entered\\\", which indicates there is a\\n     * `nonReentrant` function in the call stack.\\n     */\\n    function _reentrancyGuardEntered() internal view returns (bool) {\\n        return _status == ENTERED;\\n    }\\n}\\n\",\"keccak256\":\"0x11a5a79827df29e915a12740caf62fe21ebe27c08c9ae3e09abe9ee3ba3866d3\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/introspection/IERC165.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.1.0) (utils/introspection/IERC165.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Interface of the ERC-165 standard, as defined in the\\n * https://eips.ethereum.org/EIPS/eip-165[ERC].\\n *\\n * Implementers can declare support of contract interfaces, which can then be\\n * queried by others ({ERC165Checker}).\\n *\\n * For an implementation, see {ERC165}.\\n */\\ninterface IERC165 {\\n    /**\\n     * @dev Returns true if this contract implements the interface defined by\\n     * `interfaceId`. See the corresponding\\n     * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[ERC section]\\n     * to learn more about how these ids are created.\\n     *\\n     * This function call must use less than 30 000 gas.\\n     */\\n    function supportsInterface(bytes4 interfaceId) external view returns (bool);\\n}\\n\",\"keccak256\":\"0x79796192ec90263f21b464d5bc90b777a525971d3de8232be80d9c4f9fb353b8\",\"license\":\"MIT\"},\"contracts/MergeTgt.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.9;\\n\\nimport { Ownable } from \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\nimport { ReentrancyGuard } from \\\"@openzeppelin/contracts/utils/ReentrancyGuard.sol\\\";\\nimport { SafeERC20 } from \\\"@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol\\\";\\nimport { IERC20 } from \\\"@openzeppelin/contracts/token/ERC20/IERC20.sol\\\";\\nimport { IERC677Receiver } from \\\"./interfaces/IERC677Receiver.sol\\\";\\nimport { IMerge } from \\\"./interfaces/IMerge.sol\\\";\\n\\ncontract MergeTgt is IMerge, Ownable, ReentrancyGuard {\\n    using SafeERC20 for IERC20;\\n\\n    IERC20 public immutable tgt;\\n    IERC20 public immutable titn;\\n\\n    uint256 public constant TGT_TO_EXCHANGE = 579_000_000 * 10 ** 18; // 57.9% of MAX_TGT\\n    uint256 public constant TITN_ARB = 173_700_000 * 10 ** 18; // 17.37% of MAX_TITN\\n    uint256 public launchTime;\\n\\n    mapping(address => uint256) public claimedTitnPerUser;\\n    mapping(address => uint256) public claimableTitnPerUser;\\n    uint256 public totalTitnClaimed;\\n    uint256 public totalTitnClaimable;\\n    uint256 public remainingTitnAfter1Year;\\n    uint256 public initialTotalClaimable; // store the initial claimable TITN after 1 year\\n\\n    LockedStatus public lockedStatus;\\n\\n    // Events\\n    event Deposit(address indexed token, uint256 amount);\\n    event Withdraw(address indexed token, uint256 amount, address indexed to);\\n    event LaunchTimeSet(uint256 timestamp);\\n    event LockedStatusUpdated(LockedStatus newStatus);\\n    event ClaimTitn(address indexed user, uint256 amount);\\n    event ClaimableTitnUpdated(address indexed user, uint256 titnOut);\\n    event WithdrawRemainingTitn(address indexed user, uint256 amount);\\n\\n    constructor(address _tgt, address _titn, address initialOwner) Ownable(initialOwner) {\\n        tgt = IERC20(_tgt);\\n        titn = IERC20(_titn);\\n    }\\n\\n    function deposit(IERC20 token, uint256 amount) external onlyOwner {\\n        if (token != titn) {\\n            revert InvalidTokenReceived();\\n        }\\n\\n        // enforce that the deposited amount is 12_500_000 * 10**18\\n        if (amount != TITN_ARB) {\\n            revert InvalidAmountReceived();\\n        }\\n\\n        token.safeTransferFrom(msg.sender, address(this), amount);\\n        emit Deposit(address(token), amount);\\n    }\\n\\n    /// @notice Withdraw any locked contracts in Merge contract\\n    function withdraw(IERC20 token, uint256 amount) external onlyOwner {\\n        token.safeTransfer(owner(), amount);\\n        emit Withdraw(address(token), amount, owner());\\n    }\\n\\n    /// @notice tgt token transferAndCall ERC677-like\\n    function onTokenTransfer(address from, uint256 amount, bytes calldata extraData) external nonReentrant {\\n        if (msg.sender != address(tgt)) {\\n            revert InvalidTokenReceived();\\n        }\\n        if (lockedStatus == LockedStatus.Locked || launchTime == 0) {\\n            revert MergeLocked();\\n        }\\n        if (amount == 0) {\\n            revert ZeroAmount();\\n        }\\n        if (block.timestamp - launchTime > 360 days) {\\n            revert MergeEnded();\\n        }\\n\\n        // tgt in, titn out\\n\\n        uint256 titnOut = quoteTitn(amount);\\n        claimableTitnPerUser[from] += titnOut;\\n        totalTitnClaimable += titnOut;\\n\\n        emit ClaimableTitnUpdated(from, titnOut);\\n    }\\n\\n    function tgtBalance() external view returns (uint256) {\\n        return tgt.balanceOf(address(this));\\n    }\\n\\n    function titnBalance() external view returns (uint256) {\\n        return titn.balanceOf(address(this));\\n    }\\n\\n    function claimTitn(uint256 amount) external nonReentrant {\\n        require(amount <= claimableTitnPerUser[msg.sender], \\\"Not enough claimable titn\\\");\\n\\n        claimedTitnPerUser[msg.sender] += amount;\\n        claimableTitnPerUser[msg.sender] -= amount;\\n\\n        totalTitnClaimed += amount;\\n        totalTitnClaimable -= amount;\\n\\n        titn.safeTransfer(msg.sender, amount);\\n\\n        emit ClaimTitn(msg.sender, amount);\\n    }\\n\\n    function withdrawRemainingTitn() external nonReentrant {\\n        require(launchTime > 0, \\\"Launch time not set\\\");\\n\\n        if (block.timestamp - launchTime < 360 days) {\\n            revert TooEarlyToClaimRemainingTitn();\\n        }\\n\\n        uint256 currentRemainingTitn = titn.balanceOf(address(this));\\n\\n        if (remainingTitnAfter1Year == 0) {\\n            // Initialize remainingTitnAfter1Year to the current balance of TITN\\n            remainingTitnAfter1Year = currentRemainingTitn;\\n\\n            // Capture the total claimable TITN at the time of the first claim\\n            initialTotalClaimable = totalTitnClaimable;\\n        }\\n\\n        uint256 claimableTitn = claimableTitnPerUser[msg.sender];\\n        require(claimableTitn > 0, \\\"No claimable TITN\\\");\\n\\n        // Calculate proportional remaining TITN for the user\\n        uint256 unclaimedTitn = remainingTitnAfter1Year - initialTotalClaimable;\\n        uint256 userProportionalShare = (claimableTitn * unclaimedTitn) / initialTotalClaimable;\\n\\n        uint256 titnOut = claimableTitn + userProportionalShare;\\n\\n        // Update state variables\\n        claimableTitnPerUser[msg.sender] = 0; // each user can only claim once\\n        totalTitnClaimed += titnOut;\\n\\n        // Transfer TITN to the user\\n        titn.safeTransfer(msg.sender, titnOut);\\n\\n        emit WithdrawRemainingTitn(msg.sender, titnOut);\\n    }\\n\\n    function quoteTitn(uint256 tgtAmount) public view returns (uint256 titnAmount) {\\n        require(launchTime > 0, \\\"Launch time not set\\\");\\n\\n        uint256 timeSinceLaunch = (block.timestamp - launchTime);\\n        if (timeSinceLaunch < 90 days) {\\n            titnAmount = (tgtAmount * TITN_ARB) / TGT_TO_EXCHANGE;\\n        } else if (timeSinceLaunch < 360 days) {\\n            uint256 remainingtime = 360 days - timeSinceLaunch;\\n            titnAmount = (tgtAmount * TITN_ARB * remainingtime) / (TGT_TO_EXCHANGE * 270 days); //270 days = 9 months\\n        } else {\\n            titnAmount = 0;\\n        }\\n    }\\n\\n    function setLockedStatus(LockedStatus newStatus) external onlyOwner {\\n        lockedStatus = newStatus;\\n        emit LockedStatusUpdated(newStatus);\\n    }\\n\\n    function setLaunchTime() external onlyOwner {\\n        require(launchTime == 0, \\\"Launch time already set\\\");\\n        launchTime = block.timestamp;\\n        emit LaunchTimeSet(block.timestamp);\\n    }\\n\\n    function gettotalClaimedTitnPerUser(address user) external view returns (uint256) {\\n        return claimedTitnPerUser[user];\\n    }\\n\\n    function getClaimableTitnPerUser(address user) external view returns (uint256) {\\n        return claimableTitnPerUser[user];\\n    }\\n}\\n\",\"keccak256\":\"0xaaf99e550d9739c9075642c6cb0a4b82a61475e6c719de5c2679fc192d6f3067\",\"license\":\"MIT\"},\"contracts/interfaces/IERC677Receiver.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.20;\\n\\n/**\\n * @title IERC1363Receiver\\n * @dev Interface for any contract that wants to support `transferAndCall` or `transferFromAndCall` from ERC-1363 token contracts.\\n */\\ninterface IERC677Receiver {\\n   \\n    function onTokenTransfer(address sender, uint value, bytes calldata data) external;\\n}\\n\",\"keccak256\":\"0xedb3e36e5c3350ac58420b68de92f24c54b73fc044004a196a1575cfd8a2456f\",\"license\":\"MIT\"},\"contracts/interfaces/IMerge.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.9;\\n\\ninterface IMerge {\\n    enum LockedStatus {\\n        Locked,\\n        OneWay,\\n        TwoWay\\n    }\\n\\n    error MergeEnded();\\n    error MergeLocked();\\n    error InvalidTokenReceived();\\n    error InvalidAmountReceived();\\n    error ZeroAmount();\\n    error TooEarlyToClaimRemainingTitn();\\n}\\n\",\"keccak256\":\"0x67ddcd8647c9daa09036b6ba5b755fa6a2a4b02cee37b8e9f3c5145dec139e0d\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60c06040523480156200001157600080fd5b5060405162001346380380620013468339810160408190526200003491620000fa565b806001600160a01b0381166200006457604051631e4fbdf760e01b81526000600482015260240160405180910390fd5b6200006f816200008d565b5050600180556001600160a01b039182166080521660a05262000144565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b80516001600160a01b0381168114620000f557600080fd5b919050565b6000806000606084860312156200011057600080fd5b6200011b84620000dd565b92506200012b60208501620000dd565b91506200013b60408501620000dd565b90509250925092565b60805160a0516111ab6200019b600039600081816101d901528181610484015281816105d9015281816107ee015281816109c60152610c640152600081816102c10152818161076b0152610ad401526111ab6000f3fe608060405234801561001057600080fd5b50600436106101a95760003560e01c806372d2c97e116100f9578063b5e8296d11610097578063f2fde38b11610071578063f2fde38b146103a3578063f3a75285146103b6578063f3fef3a3146103c9578063fa472d04146103dc57600080fd5b8063b5e8296d14610376578063b943d64014610389578063e9acd4ed1461039b57600080fd5b80638da5cb5b116100d35780638da5cb5b1461032a5780639e3e47e81461033b5780639f142baa1461035b578063a4c0ed361461036357600080fd5b806372d2c97e14610305578063790ca4131461030e57806379a4ce6a1461031757600080fd5b806347a751b4116101665780635935944911610140578063593594491461029357806367abd24c146102bc578063715018a6146102e357806372a1789a146102eb57600080fd5b806347a751b41461024f57806347b959d31461027857806347e7ef241461028057600080fd5b80630afdb3f8146101ae5780630e200933146101ca5780633ccf7e3e146101d45780633e9ff9c814610213578063457d2a331461021c578063471610ce1461022f575b600080fd5b6101b760085481565b6040519081526020015b60405180910390f35b6101d26103e5565b005b6101fb7f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b0390911681526020016101c1565b6101b760055481565b6101b761022a366004610f7b565b610645565b6101b761023d366004610fa9565b60036020526000908152604090205481565b6101b761025d366004610fa9565b6001600160a01b031660009081526004602052604090205490565b6101b7610753565b6101d261028e366004610fcd565b6107e4565b6101b76102a1366004610fa9565b6001600160a01b031660009081526003602052604090205490565b6101fb7f000000000000000000000000000000000000000000000000000000000000000081565b6101d26108c5565b6009546102f89060ff1681565b6040516101c1919061100f565b6101b760075481565b6101b760025481565b6101d2610325366004610f7b565b6108d7565b6000546001600160a01b03166101fb565b6101b7610349366004610fa9565b60046020526000908152604090205481565b6101d2610a2e565b6101d2610371366004611037565b610ac1565b6101b76b01def004e4b97d732300000081565b6101b76a8fae67de37a5a28a80000081565b6101b7610c4c565b6101d26103b1366004610fa9565b610c9b565b6101d26103c43660046110c0565b610cd6565b6101d26103d7366004610fcd565b610d3c565b6101b760065481565b6103ed610dc6565b60006002541161043a5760405162461bcd60e51b815260206004820152601360248201527213185d5b98da081d1a5b59481b9bdd081cd95d606a1b60448201526064015b60405180910390fd5b6301da9c006002544261044d91906110f7565b101561046c57604051635fbfb5fb60e01b815260040160405180910390fd5b6040516370a0823160e01b81523060048201526000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa1580156104d3573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104f79190611110565b905060075460000361050f5760078190556006546008555b33600090815260046020526040902054806105605760405162461bcd60e51b815260206004820152601160248201527027379031b630b4b6b0b13632902a24aa2760791b6044820152606401610431565b600060085460075461057291906110f7565b9050600060085482846105859190611129565b61058f9190611140565b9050600061059d8285611162565b3360009081526004602052604081208190556005805492935083929091906105c6908490611162565b9091555061060090506001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000163383610df0565b60405181815233907f4bf97e95ca3d6c3c2ccfe8fcf9eec40b737eaf378c8ff73677a672f24bcdabdf9060200160405180910390a2505050505061064360018055565b565b6000806002541161068e5760405162461bcd60e51b815260206004820152601360248201527213185d5b98da081d1a5b59481b9bdd081cd95d606a1b6044820152606401610431565b60006002544261069e91906110f7565b90506276a7008110156106de576b01def004e4b97d73230000006106cd6a8fae67de37a5a28a80000085611129565b6106d79190611140565b915061074d565b6301da9c008110156107485760006106fa826301da9c006110f7565b90506107166b01def004e4b97d7323000000630163f500611129565b8161072c6a8fae67de37a5a28a80000087611129565b6107369190611129565b6107409190611140565b92505061074d565b600091505b50919050565b6040516370a0823160e01b81523060048201526000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a08231906024015b602060405180830381865afa1580156107bb573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906107df9190611110565b905090565b6107ec610e54565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316826001600160a01b03161461083e57604051636d5f86d560e01b815260040160405180910390fd5b6a8fae67de37a5a28a80000081146108695760405163c20c399360e01b815260040160405180910390fd5b61087e6001600160a01b038316333084610e81565b816001600160a01b03167fe1fffcc4923d04b559f4d29a8bfc6cda04eb5b0d3c460751c2402c5c5cc9109c826040516108b991815260200190565b60405180910390a25050565b6108cd610e54565b6106436000610eba565b6108df610dc6565b3360009081526004602052604090205481111561093e5760405162461bcd60e51b815260206004820152601960248201527f4e6f7420656e6f75676820636c61696d61626c65207469746e000000000000006044820152606401610431565b336000908152600360205260408120805483929061095d908490611162565b909155505033600090815260046020526040812080548392906109819084906110f7565b92505081905550806005600082825461099a9190611162565b9250508190555080600660008282546109b391906110f7565b909155506109ed90506001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000163383610df0565b60405181815233907f770fd956986104c67f2bbd1afec8ea0748d0e7b221abf52783e1bf7a56fa54e39060200160405180910390a2610a2b60018055565b50565b610a36610e54565b60025415610a865760405162461bcd60e51b815260206004820152601760248201527f4c61756e63682074696d6520616c7265616479207365740000000000000000006044820152606401610431565b4260028190556040519081527f904fc432821d8cadec83d758c8133c3003214b3735ce8c68f0d2428e2e2f2f2b9060200160405180910390a1565b610ac9610dc6565b336001600160a01b037f00000000000000000000000000000000000000000000000000000000000000001614610b1257604051636d5f86d560e01b815260040160405180910390fd5b600060095460ff166002811115610b2b57610b2b610ff9565b1480610b375750600254155b15610b555760405163dd4598d160e01b815260040160405180910390fd5b82600003610b7657604051631f2a200560e01b815260040160405180910390fd5b6301da9c0060025442610b8991906110f7565b1115610ba85760405163dd0c752360e01b815260040160405180910390fd5b6000610bb384610645565b6001600160a01b038616600090815260046020526040812080549293508392909190610be0908490611162565b925050819055508060066000828254610bf99190611162565b90915550506040518181526001600160a01b038616907fc40c9a2d24837f1575d46e0e5163180910813a5e2b15e10ff415ee252c521c129060200160405180910390a250610c4660018055565b50505050565b6040516370a0823160e01b81523060048201526000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a082319060240161079e565b610ca3610e54565b6001600160a01b038116610ccd57604051631e4fbdf760e01b815260006004820152602401610431565b610a2b81610eba565b610cde610e54565b6009805482919060ff19166001836002811115610cfd57610cfd610ff9565b02179055507f5b540ba7ba0d49a9324e5449fbaaae3f7bb79fda716fab1b4c17f2a43c836fcb81604051610d31919061100f565b60405180910390a150565b610d44610e54565b610d6a610d596000546001600160a01b031690565b6001600160a01b0384169083610df0565b6000546001600160a01b03166001600160a01b0316826001600160a01b03167f56c54ba9bd38d8fd62012e42c7ee564519b09763c426d331b3661b537ead19b283604051610dba91815260200190565b60405180910390a35050565b600260015403610de957604051633ee5aeb560e01b815260040160405180910390fd5b6002600155565b6040516001600160a01b03838116602483015260448201839052610e4f91859182169063a9059cbb906064015b604051602081830303815290604052915060e01b6020820180516001600160e01b038381831617835250505050610f0a565b505050565b6000546001600160a01b031633146106435760405163118cdaa760e01b8152336004820152602401610431565b6040516001600160a01b038481166024830152838116604483015260648201839052610c469186918216906323b872dd90608401610e1d565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b600080602060008451602086016000885af180610f2d576040513d6000823e3d81fd5b50506000513d91508115610f45578060011415610f52565b6001600160a01b0384163b155b15610c4657604051635274afe760e01b81526001600160a01b0385166004820152602401610431565b600060208284031215610f8d57600080fd5b5035919050565b6001600160a01b0381168114610a2b57600080fd5b600060208284031215610fbb57600080fd5b8135610fc681610f94565b9392505050565b60008060408385031215610fe057600080fd5b8235610feb81610f94565b946020939093013593505050565b634e487b7160e01b600052602160045260246000fd5b602081016003831061103157634e487b7160e01b600052602160045260246000fd5b91905290565b6000806000806060858703121561104d57600080fd5b843561105881610f94565b935060208501359250604085013567ffffffffffffffff8082111561107c57600080fd5b818701915087601f83011261109057600080fd5b81358181111561109f57600080fd5b8860208285010111156110b157600080fd5b95989497505060200194505050565b6000602082840312156110d257600080fd5b813560038110610fc657600080fd5b634e487b7160e01b600052601160045260246000fd5b8181038181111561110a5761110a6110e1565b92915050565b60006020828403121561112257600080fd5b5051919050565b808202811582820484141761110a5761110a6110e1565b60008261115d57634e487b7160e01b600052601260045260246000fd5b500490565b8082018082111561110a5761110a6110e156fea2646970667358221220ad3601940912556ece732fc7f01013c8ae43790402a21a280a82b62d2062779964736f6c63430008160033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106101a95760003560e01c806372d2c97e116100f9578063b5e8296d11610097578063f2fde38b11610071578063f2fde38b146103a3578063f3a75285146103b6578063f3fef3a3146103c9578063fa472d04146103dc57600080fd5b8063b5e8296d14610376578063b943d64014610389578063e9acd4ed1461039b57600080fd5b80638da5cb5b116100d35780638da5cb5b1461032a5780639e3e47e81461033b5780639f142baa1461035b578063a4c0ed361461036357600080fd5b806372d2c97e14610305578063790ca4131461030e57806379a4ce6a1461031757600080fd5b806347a751b4116101665780635935944911610140578063593594491461029357806367abd24c146102bc578063715018a6146102e357806372a1789a146102eb57600080fd5b806347a751b41461024f57806347b959d31461027857806347e7ef241461028057600080fd5b80630afdb3f8146101ae5780630e200933146101ca5780633ccf7e3e146101d45780633e9ff9c814610213578063457d2a331461021c578063471610ce1461022f575b600080fd5b6101b760085481565b6040519081526020015b60405180910390f35b6101d26103e5565b005b6101fb7f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b0390911681526020016101c1565b6101b760055481565b6101b761022a366004610f7b565b610645565b6101b761023d366004610fa9565b60036020526000908152604090205481565b6101b761025d366004610fa9565b6001600160a01b031660009081526004602052604090205490565b6101b7610753565b6101d261028e366004610fcd565b6107e4565b6101b76102a1366004610fa9565b6001600160a01b031660009081526003602052604090205490565b6101fb7f000000000000000000000000000000000000000000000000000000000000000081565b6101d26108c5565b6009546102f89060ff1681565b6040516101c1919061100f565b6101b760075481565b6101b760025481565b6101d2610325366004610f7b565b6108d7565b6000546001600160a01b03166101fb565b6101b7610349366004610fa9565b60046020526000908152604090205481565b6101d2610a2e565b6101d2610371366004611037565b610ac1565b6101b76b01def004e4b97d732300000081565b6101b76a8fae67de37a5a28a80000081565b6101b7610c4c565b6101d26103b1366004610fa9565b610c9b565b6101d26103c43660046110c0565b610cd6565b6101d26103d7366004610fcd565b610d3c565b6101b760065481565b6103ed610dc6565b60006002541161043a5760405162461bcd60e51b815260206004820152601360248201527213185d5b98da081d1a5b59481b9bdd081cd95d606a1b60448201526064015b60405180910390fd5b6301da9c006002544261044d91906110f7565b101561046c57604051635fbfb5fb60e01b815260040160405180910390fd5b6040516370a0823160e01b81523060048201526000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a0823190602401602060405180830381865afa1580156104d3573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104f79190611110565b905060075460000361050f5760078190556006546008555b33600090815260046020526040902054806105605760405162461bcd60e51b815260206004820152601160248201527027379031b630b4b6b0b13632902a24aa2760791b6044820152606401610431565b600060085460075461057291906110f7565b9050600060085482846105859190611129565b61058f9190611140565b9050600061059d8285611162565b3360009081526004602052604081208190556005805492935083929091906105c6908490611162565b9091555061060090506001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000163383610df0565b60405181815233907f4bf97e95ca3d6c3c2ccfe8fcf9eec40b737eaf378c8ff73677a672f24bcdabdf9060200160405180910390a2505050505061064360018055565b565b6000806002541161068e5760405162461bcd60e51b815260206004820152601360248201527213185d5b98da081d1a5b59481b9bdd081cd95d606a1b6044820152606401610431565b60006002544261069e91906110f7565b90506276a7008110156106de576b01def004e4b97d73230000006106cd6a8fae67de37a5a28a80000085611129565b6106d79190611140565b915061074d565b6301da9c008110156107485760006106fa826301da9c006110f7565b90506107166b01def004e4b97d7323000000630163f500611129565b8161072c6a8fae67de37a5a28a80000087611129565b6107369190611129565b6107409190611140565b92505061074d565b600091505b50919050565b6040516370a0823160e01b81523060048201526000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a08231906024015b602060405180830381865afa1580156107bb573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906107df9190611110565b905090565b6107ec610e54565b7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316826001600160a01b03161461083e57604051636d5f86d560e01b815260040160405180910390fd5b6a8fae67de37a5a28a80000081146108695760405163c20c399360e01b815260040160405180910390fd5b61087e6001600160a01b038316333084610e81565b816001600160a01b03167fe1fffcc4923d04b559f4d29a8bfc6cda04eb5b0d3c460751c2402c5c5cc9109c826040516108b991815260200190565b60405180910390a25050565b6108cd610e54565b6106436000610eba565b6108df610dc6565b3360009081526004602052604090205481111561093e5760405162461bcd60e51b815260206004820152601960248201527f4e6f7420656e6f75676820636c61696d61626c65207469746e000000000000006044820152606401610431565b336000908152600360205260408120805483929061095d908490611162565b909155505033600090815260046020526040812080548392906109819084906110f7565b92505081905550806005600082825461099a9190611162565b9250508190555080600660008282546109b391906110f7565b909155506109ed90506001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000163383610df0565b60405181815233907f770fd956986104c67f2bbd1afec8ea0748d0e7b221abf52783e1bf7a56fa54e39060200160405180910390a2610a2b60018055565b50565b610a36610e54565b60025415610a865760405162461bcd60e51b815260206004820152601760248201527f4c61756e63682074696d6520616c7265616479207365740000000000000000006044820152606401610431565b4260028190556040519081527f904fc432821d8cadec83d758c8133c3003214b3735ce8c68f0d2428e2e2f2f2b9060200160405180910390a1565b610ac9610dc6565b336001600160a01b037f00000000000000000000000000000000000000000000000000000000000000001614610b1257604051636d5f86d560e01b815260040160405180910390fd5b600060095460ff166002811115610b2b57610b2b610ff9565b1480610b375750600254155b15610b555760405163dd4598d160e01b815260040160405180910390fd5b82600003610b7657604051631f2a200560e01b815260040160405180910390fd5b6301da9c0060025442610b8991906110f7565b1115610ba85760405163dd0c752360e01b815260040160405180910390fd5b6000610bb384610645565b6001600160a01b038616600090815260046020526040812080549293508392909190610be0908490611162565b925050819055508060066000828254610bf99190611162565b90915550506040518181526001600160a01b038616907fc40c9a2d24837f1575d46e0e5163180910813a5e2b15e10ff415ee252c521c129060200160405180910390a250610c4660018055565b50505050565b6040516370a0823160e01b81523060048201526000907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906370a082319060240161079e565b610ca3610e54565b6001600160a01b038116610ccd57604051631e4fbdf760e01b815260006004820152602401610431565b610a2b81610eba565b610cde610e54565b6009805482919060ff19166001836002811115610cfd57610cfd610ff9565b02179055507f5b540ba7ba0d49a9324e5449fbaaae3f7bb79fda716fab1b4c17f2a43c836fcb81604051610d31919061100f565b60405180910390a150565b610d44610e54565b610d6a610d596000546001600160a01b031690565b6001600160a01b0384169083610df0565b6000546001600160a01b03166001600160a01b0316826001600160a01b03167f56c54ba9bd38d8fd62012e42c7ee564519b09763c426d331b3661b537ead19b283604051610dba91815260200190565b60405180910390a35050565b600260015403610de957604051633ee5aeb560e01b815260040160405180910390fd5b6002600155565b6040516001600160a01b03838116602483015260448201839052610e4f91859182169063a9059cbb906064015b604051602081830303815290604052915060e01b6020820180516001600160e01b038381831617835250505050610f0a565b505050565b6000546001600160a01b031633146106435760405163118cdaa760e01b8152336004820152602401610431565b6040516001600160a01b038481166024830152838116604483015260648201839052610c469186918216906323b872dd90608401610e1d565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b600080602060008451602086016000885af180610f2d576040513d6000823e3d81fd5b50506000513d91508115610f45578060011415610f52565b6001600160a01b0384163b155b15610c4657604051635274afe760e01b81526001600160a01b0385166004820152602401610431565b600060208284031215610f8d57600080fd5b5035919050565b6001600160a01b0381168114610a2b57600080fd5b600060208284031215610fbb57600080fd5b8135610fc681610f94565b9392505050565b60008060408385031215610fe057600080fd5b8235610feb81610f94565b946020939093013593505050565b634e487b7160e01b600052602160045260246000fd5b602081016003831061103157634e487b7160e01b600052602160045260246000fd5b91905290565b6000806000806060858703121561104d57600080fd5b843561105881610f94565b935060208501359250604085013567ffffffffffffffff8082111561107c57600080fd5b818701915087601f83011261109057600080fd5b81358181111561109f57600080fd5b8860208285010111156110b157600080fd5b95989497505060200194505050565b6000602082840312156110d257600080fd5b813560038110610fc657600080fd5b634e487b7160e01b600052601160045260246000fd5b8181038181111561110a5761110a6110e1565b92915050565b60006020828403121561112257600080fd5b5051919050565b808202811582820484141761110a5761110a6110e1565b60008261115d57634e487b7160e01b600052601260045260246000fd5b500490565b8082018082111561110a5761110a6110e156fea2646970667358221220ad3601940912556ece732fc7f01013c8ae43790402a21a280a82b62d2062779964736f6c63430008160033",
+  "devdoc": {
+    "errors": {
+      "OwnableInvalidOwner(address)": [
+        {
+          "details": "The owner is not a valid owner account. (eg. `address(0)`)"
+        }
+      ],
+      "OwnableUnauthorizedAccount(address)": [
+        {
+          "details": "The caller account is not authorized to perform an operation."
+        }
+      ],
+      "ReentrancyGuardReentrantCall()": [
+        {
+          "details": "Unauthorized reentrant call."
+        }
+      ],
+      "SafeERC20FailedOperation(address)": [
+        {
+          "details": "An operation with an ERC-20 token failed."
+        }
+      ]
+    },
+    "kind": "dev",
+    "methods": {
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "onTokenTransfer(address,uint256,bytes)": {
+        "notice": "tgt token transferAndCall ERC677-like"
+      },
+      "withdraw(address,uint256)": {
+        "notice": "Withdraw any locked contracts in Merge contract"
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 3841,
+        "contract": "contracts/MergeTgt.sol:MergeTgt",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 5276,
+        "contract": "contracts/MergeTgt.sol:MergeTgt",
+        "label": "_status",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 5392,
+        "contract": "contracts/MergeTgt.sol:MergeTgt",
+        "label": "launchTime",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 5396,
+        "contract": "contracts/MergeTgt.sol:MergeTgt",
+        "label": "claimedTitnPerUser",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 5400,
+        "contract": "contracts/MergeTgt.sol:MergeTgt",
+        "label": "claimableTitnPerUser",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 5402,
+        "contract": "contracts/MergeTgt.sol:MergeTgt",
+        "label": "totalTitnClaimed",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 5404,
+        "contract": "contracts/MergeTgt.sol:MergeTgt",
+        "label": "totalTitnClaimable",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 5406,
+        "contract": "contracts/MergeTgt.sol:MergeTgt",
+        "label": "remainingTitnAfter1Year",
+        "offset": 0,
+        "slot": "7",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 5408,
+        "contract": "contracts/MergeTgt.sol:MergeTgt",
+        "label": "initialTotalClaimable",
+        "offset": 0,
+        "slot": "8",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 5411,
+        "contract": "contracts/MergeTgt.sol:MergeTgt",
+        "label": "lockedStatus",
+        "offset": 0,
+        "slot": "9",
+        "type": "t_enum(LockedStatus)6227"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_enum(LockedStatus)6227": {
+        "encoding": "inplace",
+        "label": "enum IMerge.LockedStatus",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
