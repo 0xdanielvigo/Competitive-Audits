@@ -197,7 +197,6 @@ contract MarketController is
      * @param _oracle New oracle address
      * @dev Only callable by contract owner, for emergency situations
      */
-     //@audit-medium ✅, if oracle is updated, the condition id changes, users who minted tokens with the past oracle are not able anymore to claim their tokens
     function updateOracle(address _oracle) external onlyOwner {
         require(_oracle != address(0), "Invalid oracle");
         oracle = _oracle;
@@ -395,13 +394,6 @@ contract MarketController is
      * @param sellSignature The seller's signature
      * @param fillAmount Amount to fill (must not exceed either order)
      */
-    //@audit-medium?, if nonces change every time an user executes an order, if they initially partially filled their order, they will be not able to 
-    // fulfill it again since the questionID changes, this may lead to many partially filled orders.
-
-    //@audit-medium ✅, Users can execute orders in resolved markets. 
-    // After market resolution, users may still have the possibility to execute orders (they could know what is the final outcome).
-    // Market can be resolved before the end of an epoch, if this happens, users may have the time to execute orders with the resolved outcome
-    // this is possible since order executions don't check if the current epoch has been resolved
     function executeOrderMatch(
         IMarketController.Order calldata buyOrder,
         IMarketController.Order calldata sellOrder,
@@ -470,13 +462,6 @@ contract MarketController is
      * @param fillAmount Amount to fill
      * @param counterparty Address providing liquidity (authorized matcher)
      */
-     //@audit-low / medium (duplicate)?, if nonces change every time an user executes an order, if they initially partially filled their order, they will be not able to 
-     // fulfill it again since the questionID changes
-
-     //@audit-medium ✅ (duplicate), Users can execute trades in a specific market also after the market resolution. 
-    // After market resolution, users may still have the possibility to execute orders (they could know what is the final outcome).
-    // Market can be resolved before the end of an epoch, if this happens, users may have the time to execute orders with the resolved outcome
-    // this is possible since order executions check if the market is open in Market, they don't look at MarketResolver.sol
     function executeSingleOrder(
         IMarketController.Order calldata order,
         bytes calldata signature,
@@ -1026,8 +1011,6 @@ contract MarketController is
     * @notice Executes order against matcher's liquidity (inventory-based only)
     * @dev Matchers are expected to pre-mint and hold inventory. Does not support JIT minting.
     */
-    //@audit-medium ✅, matcher order is not executed and it is not fulfilled
-    //since the matcher order is not fulfilled, some orders may let the matcher buy / sell position tokens that he doesn't want to buy / sell
     function _executeAgainstMatcher(IMarketController.Order calldata order, uint256 fillAmount, address matcher) internal {
         uint256 numberOfOutcomes = market.getOutcomeCount(order.questionId);
         bytes32 conditionId = market.getConditionId(oracle, order.questionId, numberOfOutcomes, 0);
@@ -1038,8 +1021,6 @@ contract MarketController is
         //this would be a griefing attack, where the user is able to mint and / burn a small amount of tokens, but if the payment token is usdc (6 DECIMALS)
         //this could easily lead to accrue matcher's losses to hypotetically more than 10$
 
-        //@audit-medium Bad price calculation
-        // price should be retrieved by the maker's order, it shouln't be used the taker's order to retrieve the price
         uint256 paymentAmount = (fillAmount * order.price) / 10000;
 
         if (order.isBuyOrder) {
@@ -1077,7 +1058,6 @@ contract MarketController is
 
             // Calculate trade fee from matcher (buyer in this case)
             uint256 matcherFeeRate = _getEffectiveTradeFeeRate(matcher);
-            //@audit-high ✅, when maker pays the taker, net payment should be calulated based on taker trade fees rates, not maker trade fees rates 
             uint256 tradeFee = (paymentAmount * matcherFeeRate) / 10000;
             uint256 netPayment = paymentAmount - tradeFee;
 
