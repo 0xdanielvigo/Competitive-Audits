@@ -1,0 +1,23 @@
+{
+  "count": 5,
+  "market0.description": "Will Bitcoin price exceed $50,000 by end of month?",
+  "market0.outcomeCount": 2,
+  "market0.questionId": "0x97763caff7b74a40f4703f72ff6cf0f3a70ae5398f6c8259e4a411ba3b9f0d9c",
+  "market0.resolutionTime": 0,
+  "market1.description": "Will Ethereum price exceed $3,000 by end of week?",
+  "market1.outcomeCount": 2,
+  "market1.questionId": "0xbd0f8d791b75a23711a7359cc50111d94c0003a749386fee26881141894f0eb6",
+  "market1.resolutionTime": 1755757752,
+  "market2.description": "S&P 500 direction next week: Up, Down, Sideways, Volatile",
+  "market2.outcomeCount": 4,
+  "market2.questionId": "0x404d294faaff809a17eba6b293a24b46f3577269b3968b049f3c02fc072a6a88",
+  "market2.resolutionTime": 1755757752,
+  "market3.description": "NYC weather tomorrow: Sunny, Cloudy, Rainy",
+  "market3.outcomeCount": 3,
+  "market3.questionId": "0xd5b2d8f954fd626ace808b08dce9b931add3c9a2e0c09a6146b9e43de2203659",
+  "market3.resolutionTime": 1755239352,
+  "market4.description": "Next major game outcome: Team A, Team B",
+  "market4.outcomeCount": 2,
+  "market4.questionId": "0xcb9045cd51a0182703f7222e1169c89f6c7a47eb70812d1f844f6a8b65bbf9cb",
+  "market4.resolutionTime": 1755412152
+}

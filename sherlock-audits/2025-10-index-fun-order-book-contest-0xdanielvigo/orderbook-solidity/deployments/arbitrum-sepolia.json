@@ -1,0 +1,19 @@
+{
+  "chainId": 421614,
+  "collateralToken": "0x779877A7B0D9E8603169DdbD7836e478b4624789",
+  "deploymentSalt": "0x85439683f11f18db0c7430e533964caea1153f44dafe5b4a71ad10f4878c0b65",
+  "deterministicDeployment": true,
+  "market": "0x5B855ee147189FE343eA06183734a6369B7A9CB4",
+  "marketController": "0x8149569039E67428FC7391e82aA85a30cf6fB9d4",
+  "marketControllerImpl": "0x3F6ca9A57e42c9b2330f3e4D54A9195289E1D218",
+  "marketImpl": "0xFc4bBcc14Edd9d937F4721DE6A2F0088AF5BD62C",
+  "marketResolver": "0x35a9c890C219E508bB2728A6fC2be5AEb53041a5",
+  "marketResolverImpl": "0x96024549b99005a3b3331f5Ec01cc4c744e2A29F",
+  "network": "arbitrum-sepolia",
+  "positionTokens": "0x9402581b72d3144f760125829318aCa58B14C6Db",
+  "positionTokensImpl": "0x3029EDd3fB4001fa16e94454558078FFFdceA884",
+  "upgradeBlockNumber": 9382673,
+  "upgradeTimestamp": 1760102334,
+  "vault": "0xccf60eed575437c0c35CaD1998A767C4521E3F3e",
+  "vaultImpl": "0xf50eEd1f593d20e7cb740C7F7c3a426204b36c6d"
+}

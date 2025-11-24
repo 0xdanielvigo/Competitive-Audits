@@ -1,0 +1,9 @@
+{
+  "blockNumber": 9268805,
+  "chainId": 11155111,
+  "deploymentSalt": "0x85439683f11f18db0c7430e533964caea1153f44dafe5b4a71ad10f4878c0b65",
+  "deterministicDeployment": true,
+  "network": "sepolia",
+  "testUSDC": "0x4ddA64408633cf7c59877735C41cB2FFE86bC963",
+  "timestamp": 1758705936
+}

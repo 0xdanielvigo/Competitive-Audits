@@ -1,0 +1,15 @@
+{
+  "blockNumber": 9275374,
+  "new_marketControllerImpl": "0x9Bf15DdB75dde5272DD199ABa173E7e18e9157EA",
+  "new_marketImpl": "0x1F4799e302907328701bA8652bD1Bcba78CB468c",
+  "new_marketResolverImpl": "0xe492391fdF16540Abf9f75820f5F39957D1eabBA",
+  "new_positionTokensImpl": "0xf4d034fD20D934ef2616DE208c29c66a5406c603",
+  "new_vaultImpl": "0xefE453133C664Fd73508336ad1C134a193FdCa65",
+  "previous_marketControllerImpl": "0x1a2B5E1D7df832538D53EBD8CA3886dDE7cA10eB",
+  "previous_marketImpl": "0x1F4799e302907328701bA8652bD1Bcba78CB468c",
+  "previous_marketResolverImpl": "0xe492391fdF16540Abf9f75820f5F39957D1eabBA",
+  "previous_positionTokensImpl": "0xf4d034fD20D934ef2616DE208c29c66a5406c603",
+  "previous_vaultImpl": "0xefE453133C664Fd73508336ad1C134a193FdCa65",
+  "reason": "Contract upgrade",
+  "timestamp": 1758785339
+}
